@@ -1,11 +1,8 @@
 from flask import Flask, render_template, jsonify
-from flask_sqlalchemy import SQLAlchemy
-
+from bd import lista1, l
+import json
 app = Flask(__name__, static_url_path='/static')
 
-app.config['SQLALCHEMY_DATABASE_URI']= "sqlite:///databases/database.db"
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
 
 @app.route("/")
 def index():
@@ -14,13 +11,14 @@ def index():
 
 @app.route("/api/v1/users")
 def api_users():
-    datos = db.engine.execute("SELECT * FROM users")
+    print(hex(id(lista1)))
+    datos = lis
     return jsonify({ 'usuarios ': [dict(tupla) for tupla in datos]})
 
 @app.route("/users/list")
 def lista_users():
-    resultado = db.engine.execute("SELECT * FROM users")
-    return render_template('users.html', datos=resultado)
+    print(hex(id(lis)))
+    return render_template('users.html', datos=lista1)
 
 
 
